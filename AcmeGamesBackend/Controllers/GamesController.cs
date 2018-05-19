@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AcmeGames.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-	[Produces("application/json")]
+    [Produces("application/json")]
 	[Route("api/games")]
 	public class GamesController : Controller
 	{

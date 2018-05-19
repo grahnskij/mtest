@@ -22,9 +22,12 @@ C:\mtest\AcmeGamesBackend\bin\Debug\netcoreapp2.0\AcmeGames.runtimeconfig.json
 C:\mtest\AcmeGamesBackend\bin\Debug\netcoreapp2.0\AcmeGames.runtimeconfig.dev.json
 C:\mtest\AcmeGamesBackend\bin\Debug\netcoreapp2.0\AcmeGames.dll
 C:\mtest\AcmeGamesBackend\bin\Debug\netcoreapp2.0\AcmeGames.pdb
-C:\mtest\AcmeGamesBackend\obj\Debug\netcoreapp2.0\AcmeGames.csprojAssemblyReference.cache
 C:\mtest\AcmeGamesBackend\obj\Debug\netcoreapp2.0\AcmeGames.csproj.CoreCompileInputs.cache
 C:\mtest\AcmeGamesBackend\obj\Debug\netcoreapp2.0\AcmeGames.AssemblyInfoInputs.cache
 C:\mtest\AcmeGamesBackend\obj\Debug\netcoreapp2.0\AcmeGames.AssemblyInfo.cs
 C:\mtest\AcmeGamesBackend\obj\Debug\netcoreapp2.0\AcmeGames.dll
 C:\mtest\AcmeGamesBackend\obj\Debug\netcoreapp2.0\AcmeGames.pdb
+C:\mtest\obj\Debug\netcoreapp2.0\AcmeGames.csprojAssemblyReference.cache
+C:\mtest\obj\Debug\netcoreapp2.0\AcmeGames.csproj.CoreCompileInputs.cache
+C:\mtest\obj\Debug\netcoreapp2.0\AcmeGames.AssemblyInfoInputs.cache
+C:\mtest\obj\Debug\netcoreapp2.0\AcmeGames.AssemblyInfo.cs

@@ -6,6 +6,7 @@ using AcmeGames.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using AcmeGames.Interfaces;
 
 namespace AcmeGames.Controllers
 {
@@ -13,11 +14,10 @@ namespace AcmeGames.Controllers
     [Route("api/login")]
     public class LoginController : Controller
     {
-        private readonly SigningCredentials     mySigningCredentials;
+        private readonly SigningCredentials mySigningCredentials;
+        private readonly ILoginService _loginService;
 
-        public LoginController(
-            IConfiguration          aConfiguration)
-        {
+        public LoginController(IConfiguration aConfiguration, IGameService gameService, ILoginService loginService){
             if (aConfiguration == null)
             {
                 throw new ArgumentNullException(nameof(aConfiguration));
@@ -25,6 +25,8 @@ namespace AcmeGames.Controllers
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(aConfiguration["JWTKey"]));
             mySigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            _loginService = loginService;
         }
 
         [HttpPost]
@@ -32,40 +34,36 @@ namespace AcmeGames.Controllers
         Authenticate(
             [FromBody] AuthRequest  aAuthRequest)
         {
-            // Implement: Retrieve a user account from the database and handle invalid login attempts
-            var user = new User
-            {
-                UserAccountId = "fake",
-                DateOfBirth = DateTime.Now,
-                EmailAddress = "foo@bar.baz",
-                FirstName = "Hard",
-                LastName = "Codedson",
-                IsAdmin = false,
-                Password = "password"
-            };
+            var user = _loginService.Login(aAuthRequest.EmailAddress, aAuthRequest.Password);
 
-            var claims = new[]
+            if(user != null)
+            {
+                var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier,    user.UserAccountId),
                 new Claim(ClaimTypes.Name,              user.FullName),
                 new Claim(ClaimTypes.GivenName,         user.FirstName),
-                new Claim(ClaimTypes.Surname,           user.LastName), 
+                new Claim(ClaimTypes.Surname,           user.LastName),
                 new Claim(ClaimTypes.DateOfBirth,       user.DateOfBirth.ToString("yyyy-MM-dd")),
                 new Claim(ClaimTypes.Email,             user.EmailAddress),
                 new Claim(ClaimTypes.Role,              user.IsAdmin ? "Admin" : "User")
             };
 
-            var token = new JwtSecurityToken(
-                "localhost:56653",
-                "localhost:56653",
-                claims,
-                expires: DateTime.Now.AddMinutes(30),
-                signingCredentials: mySigningCredentials);
+                var token = new JwtSecurityToken(
+                    "localhost:56653",
+                    "localhost:56653",
+                    claims,
+                    expires: DateTime.Now.AddMinutes(30),
+                    signingCredentials: mySigningCredentials);
 
-            return Ok(new
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token)
+                });
+            }else
             {
-                token = new JwtSecurityTokenHandler().WriteToken(token)
-            });
+                return Unauthorized();
+            }
         }
     }
 }

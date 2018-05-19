@@ -1,11 +1,12 @@
 ﻿using System.Text;
+using AcmeGames.Data;
+using AcmeGames.Interfaces;
+using AcmeGames.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Http;
-using React.AspNet;
 
 namespace AcmeGames
 {
@@ -20,9 +21,7 @@ namespace AcmeGames
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void 
-        ConfigureServices(
-            IServiceCollection  aServiceCollection)
+        public void ConfigureServices(IServiceCollection  aServiceCollection)
         {
             aServiceCollection.AddAuthentication()
                 .AddJwtBearer(options =>
@@ -40,23 +39,28 @@ namespace AcmeGames
                             Encoding.UTF8.GetBytes(signatureKey))
                     };
                 });
+            aServiceCollection.AddCors();
             aServiceCollection.AddMvc();
+
+            aServiceCollection.AddSingleton<IDatabase, Database>();
+            aServiceCollection.AddTransient<IGameService, GameService>();
+            aServiceCollection.AddTransient<ILoginService, LoginService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void 
-        Configure(
-            IApplicationBuilder aApplicationBuilder, 
-            IHostingEnvironment aHostingEnvironment)
-        {
+        public void Configure(IApplicationBuilder aApplicationBuilder, IHostingEnvironment aHostingEnvironment){
             if (aHostingEnvironment.IsDevelopment())
             {
-                aApplicationBuilder.UseDeveloperExceptionPage();
+                aApplicationBuilder.UseDeveloperExceptionPage()
+                ;
             }
 
             aApplicationBuilder
-                .UseDefaultFiles()
-                .UseStaticFiles()
+                .UseCors(builder =>
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                        )
                 .UseMvc();
         }
     }

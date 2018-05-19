@@ -5,10 +5,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using AcmeGames.Models;
 using Newtonsoft.Json;
+using System.Linq;
+using AcmeGames.Interfaces;
 
 namespace AcmeGames.Data
 {
-	public class Database
+	public class Database : IDatabase
 	{
         private static readonly Random          locRandom       = new Random();
 
@@ -17,7 +19,7 @@ namespace AcmeGames.Data
 		private static IEnumerable<Ownership>	locOwnership	= new List<Ownership>();
 		private static IEnumerable<User>		locUsers		= new List<User>();
 
-		public Database()
+	    public Database()
 		{
 			locGames		= JsonConvert.DeserializeObject<IEnumerable<Game>>(File.ReadAllText(@"Data\games.json"));
 			locKeys			= JsonConvert.DeserializeObject<IEnumerable<GameKey>>(File.ReadAllText(@"Data\keys.json"));
@@ -26,14 +28,20 @@ namespace AcmeGames.Data
 		}
 
 	    // NOTE: This accessor function must be used to access the data.
-	    private Task<IEnumerable<T>>
-	    PrivGetData<T>(
-	        IEnumerable<T>  aDataSource)
+	    private Task<IEnumerable<T>>PrivGetData<T>(IEnumerable<T>  aDataSource)
 	    {
 	        var delay = locRandom.Next(150, 1000);
             Thread.Sleep(TimeSpan.FromMilliseconds(delay));
 
 	        return Task.FromResult(aDataSource);
 	    }
+
+        public User FindUser(string email, string password)
+        {   
+            return PrivGetData<User>(locUsers).Result.SingleOrDefault(x => x.EmailAddress == email && x.Password == password);
+ 
+        }
+
+      
 	}
 }

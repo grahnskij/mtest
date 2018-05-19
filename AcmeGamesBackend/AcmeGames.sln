@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcmeGames", "AcmeGames.csproj", "{7598FBAA-68F1-4B0E-BBF4-A85A1B2861FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcmeGamesClient", "..\AcmeGamesClient\AcmeGamesClient.csproj", "{9511B023-2C96-456F-84EF-CAF05C4DAFE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcmeGamesClient", "..\AcmeGamesClient\AcmeGamesClient\AcmeGamesClient.csproj", "{2851BF3E-497C-41A9-8FC0-3618BBDE3675}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{7598FBAA-68F1-4B0E-BBF4-A85A1B2861FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7598FBAA-68F1-4B0E-BBF4-A85A1B2861FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7598FBAA-68F1-4B0E-BBF4-A85A1B2861FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9511B023-2C96-456F-84EF-CAF05C4DAFE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9511B023-2C96-456F-84EF-CAF05C4DAFE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9511B023-2C96-456F-84EF-CAF05C4DAFE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9511B023-2C96-456F-84EF-CAF05C4DAFE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2851BF3E-497C-41A9-8FC0-3618BBDE3675}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2851BF3E-497C-41A9-8FC0-3618BBDE3675}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2851BF3E-497C-41A9-8FC0-3618BBDE3675}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2851BF3E-497C-41A9-8FC0-3618BBDE3675}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
