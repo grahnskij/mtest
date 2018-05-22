@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AcmeGames.Models;
 using AcmeGames.Data;
 using AcmeGames.Interfaces;
+using AcmeGames.ViewModels;
 
 namespace AcmeGames.Services
 {
@@ -17,9 +18,10 @@ namespace AcmeGames.Services
             _db = db;
         }
 
-        public User Login(string email, string password)
+        public LoginDataViewModel Login(string email, string password)
         {
-            return _db.FindUser(email, password);
+            var user = _db.FindUser(email, password);
+            return new LoginDataViewModel(user);
         }
     }
 }

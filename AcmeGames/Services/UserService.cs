@@ -19,15 +19,12 @@ namespace AcmeGames.Services
         public UserDataViewModel GetUserData(string accountId)
         {
             var user = _db.GetUserData(accountId);
-            return new UserDataViewModel
-            {
-                Firstname = user.FirstName,
-                Lastname = user.LastName,
-                Birth = user.DateOfBirth.ToString("yyyy-MM-dd"),
-                Email = user.EmailAddress,
-                Role = user.IsAdmin ? "Admin" : "User",
-                Password = user.Password
-            };
+            return new UserDataViewModel(user);
+        }
+
+        public void UpdateUserData(UpdateUserDataViewModel vm)
+        {
+            _db.UpdateUserData(vm);
         }
     }
 }

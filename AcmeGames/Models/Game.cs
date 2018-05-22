@@ -1,10 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace AcmeGames.Models
 {
 	public class Game
 	{
 		public uint?	AgeRestriction { get; set; }
-		public uint		GameId { get; set; }
-		public string	Name { get; set; }
-		public string	Thumbnail { get; set; }
+        [Required]
+        public uint		GameId { get; set; }
+        [Required]
+        public string	Name { get; set; }
+        [Required]
+        public string	Thumbnail { get; set; }
 	}
 }

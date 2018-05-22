@@ -20,10 +20,9 @@ namespace AcmeGames.Controllers
         }
 
         [HttpGet]
-        public List<GamesListViewmodel>
-        GetUserGamesList(string id)
-        {
-            return _gameService.GetGamesForUser(id);
+        public IActionResult GetUserGamesList(string id){
+            var result = _gameService.GetGamesForUser(id);
+            return Ok(result);
         }
     }
 }

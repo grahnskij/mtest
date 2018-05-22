@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using AcmeGames.Models;
 
 namespace AcmeGames.ViewModels
 {
-    public class UserDataViewModel
+    public class UpdateUserDataViewModel
     {
         [Required]
         public string Firstname { get; set; }
@@ -21,18 +20,12 @@ namespace AcmeGames.ViewModels
         [Required]
         public string Role { get; set; }
         [Required]
-        public string Password { get; set; }
-
-        public UserDataViewModel(User user)
-        {
-            Firstname = user.FirstName;
-            Lastname = user.LastName;
-            Birth = user.DateOfBirth.ToString("yyyy-MM-dd");
-            Email = user.EmailAddress;
-            Role = user.IsAdmin ? "Admin" : "User";
-            Password = user.Password;
-        }
+        public string NewPassword { get; set; }
+        [Required]
+        public string NewPasswordConfirm { get; set; }
+        [Required]
+        public string OldPassword { get; set; }
+        [Required]
+        public string UserAccountId { get; set; }
     }
 }
-
-

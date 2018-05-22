@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace AcmeGames.ViewModels
 {
-    public class GamesListViewmodel
+    public class AuthRequestViewModel
     {
         [Required]
-        public string Game { get; set; }
+        [EmailAddress]
+        public string EmailAddress { get; set; }
         [Required]
-        public string Registered { get; set; }
-        [Required]
-        public string Thumb { get; set; }
+        public string Password { get; set; }
     }
 }

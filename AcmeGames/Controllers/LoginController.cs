@@ -2,11 +2,11 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using AcmeGames.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using AcmeGames.Interfaces;
+using AcmeGames.ViewModels;
 
 namespace AcmeGames.Controllers
 {
@@ -30,41 +30,47 @@ namespace AcmeGames.Controllers
         }
 
         [HttpPost]
-        public IActionResult
-        Authenticate(
-            [FromBody] AuthRequest  aAuthRequest)
-        {
-            var user = _loginService.Login(aAuthRequest.EmailAddress, aAuthRequest.Password);
+        public IActionResult Authenticate([FromBody] AuthRequestViewModel  aAuthRequest){
+            if(ModelState.IsValid)
+            {
+                var user = _loginService.Login(aAuthRequest.EmailAddress, aAuthRequest.Password);
 
-            if(user != null)
-            {
-                var claims = new[]
-            {
+                if (user != null)
+                {
+                    var claims = new[]
+                {
                 new Claim(ClaimTypes.NameIdentifier,    user.UserAccountId),
                 new Claim(ClaimTypes.Name,              user.FullName),
-                new Claim(ClaimTypes.GivenName,         user.FirstName),
-                new Claim(ClaimTypes.Surname,           user.LastName),
-                new Claim(ClaimTypes.DateOfBirth,       user.DateOfBirth.ToString("yyyy-MM-dd")),
-                new Claim(ClaimTypes.Email,             user.EmailAddress),
-                new Claim(ClaimTypes.Role,              user.IsAdmin ? "Admin" : "User")
-            };
+                new Claim(ClaimTypes.GivenName,         user.Firstname),
+                new Claim(ClaimTypes.Surname,           user.Lastname),
+                new Claim(ClaimTypes.DateOfBirth,       user.Birth),
+                new Claim(ClaimTypes.Email,             user.Email),
+                new Claim(ClaimTypes.Role,              user.Role) };
+                
 
-                var token = new JwtSecurityToken(
-                    "localhost:56653",
-                    "localhost:56653",
-                    claims,
-                    expires: DateTime.Now.AddMinutes(30),
-                    signingCredentials: mySigningCredentials);
+                    var token = new JwtSecurityToken(
+                        "localhost:56653",
+                        "localhost:56653",
+                        claims,
+                        expires: DateTime.Now.AddMinutes(30),
+                        signingCredentials: mySigningCredentials);
 
-                return Ok(new
+                    return Ok(new
+                    {
+                        token = new JwtSecurityTokenHandler().WriteToken(token),
+                        id = user.UserAccountId
+                    });
+                }
+                else
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    id = user.UserAccountId
-                });
-            }else
-            {
-                return Unauthorized();
+                    return Unauthorized();
+                }
             }
+            else
+            {
+                return BadRequest();
+            }
+            
         }
     }
 }

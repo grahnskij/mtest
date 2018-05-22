@@ -1,4 +1,4 @@
-﻿using AcmeGames.Models;
+﻿using AcmeGames.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,6 @@ namespace AcmeGames.Interfaces
 {
     public interface ILoginService
     {
-        User Login(string email, string password);
+        LoginDataViewModel Login(string email, string password);
     }
 }

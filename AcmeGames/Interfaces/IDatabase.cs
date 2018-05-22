@@ -1,4 +1,5 @@
 ﻿using AcmeGames.Models;
+using AcmeGames.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace AcmeGames.Interfaces
         User GetUserData(string accountId);
         List<Ownership> FindOwnership(string userAccountId);
         Game FindGame(uint gameId);
+        void UpdateUserData(UpdateUserDataViewModel vm);
     }
 }

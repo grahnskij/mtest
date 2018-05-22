@@ -1,9 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace AcmeGames.Models
 {
 	public class GameKey
 	{
-		public uint		GameId { get; set; }
-		public string	Key { get; set; }
-		public bool		IsRedeemed { get; set; }
+        [Required]
+        public uint		GameId { get; set; }
+        [Required]
+        public string	Key { get; set; }
+        [Required]
+        public bool		IsRedeemed { get; set; }
 	}
 }

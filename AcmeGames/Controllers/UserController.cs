@@ -24,9 +24,24 @@ namespace AcmeGames.Controllers
         }
 
         [HttpGet]
-        public UserDataViewModel GetUserData(string id)
+        public IActionResult GetUserData(string id)
         {
-            return _userService.GetUserData(id);
+            var result = _userService.GetUserData(id);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateUserData([FromBody] UpdateUserDataViewModel vm)
+        {
+            if(ModelState.IsValid)
+            {
+                var result = _userService.UpdateUserData(vm);
+                return Ok(result);
+            }else
+            {
+                return BadRequest();
+            }
+            
         }
     }
 }

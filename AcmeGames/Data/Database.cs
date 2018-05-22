@@ -7,6 +7,7 @@ using AcmeGames.Models;
 using Newtonsoft.Json;
 using System.Linq;
 using AcmeGames.Interfaces;
+using AcmeGames.ViewModels;
 
 namespace AcmeGames.Data
 {
@@ -30,20 +31,22 @@ namespace AcmeGames.Data
 	    // NOTE: This accessor function must be used to access the data.
 	    private Task<IEnumerable<T>>PrivGetData<T>(IEnumerable<T>  aDataSource)
 	    {
-	        //var delay = locRandom.Next(150, 1000);
-            //Thread.Sleep(TimeSpan.FromMilliseconds(delay));
+	        var delay = locRandom.Next(150, 1000);
+            Thread.Sleep(TimeSpan.FromMilliseconds(delay));
 
 	        return Task.FromResult(aDataSource);
 	    }
 
         public User FindUser(string email, string password)
         {   
-            return PrivGetData(locUsers).Result.SingleOrDefault(user => user.EmailAddress == email && user.Password == password);
+            return PrivGetData(locUsers).Result.
+                SingleOrDefault(user => user.EmailAddress == email && user.Password == password);
         }
 
         public User GetUserData(string accountId)
         {
-            return PrivGetData(locUsers).Result.SingleOrDefault(user => user.UserAccountId == accountId);
+            return PrivGetData(locUsers).Result.
+                SingleOrDefault(user => user.UserAccountId == accountId);
         }
 
         public List<Ownership> FindOwnership(string userAccountId)
@@ -59,8 +62,11 @@ namespace AcmeGames.Data
                 .FirstOrDefault(game => game.GameId == gameId);
         }
 
-
-
-      
-	}
+        public void UpdateUserData(UpdateUserDataViewModel vm)
+        {
+            var user = PrivGetData(locUsers).Result.
+                SingleOrDefault(x => x.UserAccountId == vm.UserAccountId);
+            user.Update(vm);
+        }
+    }
 }
