@@ -1,1 +1,21 @@
-﻿
+﻿.listItem {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 2em;
+    color: #2d7086;
+    border: 2px solid #2d7086;
+    border-radius: .2em;
+    padding: .5em;
+}
+
+.listItem-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%;
+}
+
+.listItem-img {
+    flex: 1 1 100%;
+    max-width: 240px;
+}

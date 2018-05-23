@@ -35,8 +35,8 @@ namespace AcmeGames.Controllers
         {
             if(ModelState.IsValid)
             {
-                var result = _userService.UpdateUserData(vm);
-                return Ok(result);
+                _userService.UpdateUserData(vm);
+                return Ok();
             }else
             {
                 return BadRequest();

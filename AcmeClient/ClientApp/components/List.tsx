@@ -55,10 +55,14 @@ class ListItem extends React.Component<listItemProps, {}> {
 
     public render() {
         return (
-            <div>
-                <label>{this.props.name}</label>
-                <label>{this.props.registered}</label>
-                <img src={this.props.thumb} />
+            <div className="listItem">
+                <div className="listItem-info">
+                    <label className="flexGrw">{this.props.name}</label>
+                    <label className="flexGrw">Registered: {this.props.registered}</label>
+                </div>
+                <div className="listItem-img flexGrw">
+                    <img src={this.props.thumb} />
+                </div>
             </div>
         );
     }

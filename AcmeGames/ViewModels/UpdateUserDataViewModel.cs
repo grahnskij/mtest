@@ -22,6 +22,7 @@ namespace AcmeGames.ViewModels
         [Required]
         public string NewPassword { get; set; }
         [Required]
+        [Compare("NewPassword")]
         public string NewPasswordConfirm { get; set; }
         [Required]
         public string OldPassword { get; set; }

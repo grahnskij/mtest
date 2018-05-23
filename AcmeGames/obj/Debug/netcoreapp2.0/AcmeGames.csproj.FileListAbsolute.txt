@@ -41,7 +41,6 @@ C:\mtest\AcmeGames\bin\Debug\netcoreapp2.0\AcmeGames.runtimeconfig.json
 C:\mtest\AcmeGames\bin\Debug\netcoreapp2.0\AcmeGames.runtimeconfig.dev.json
 C:\mtest\AcmeGames\bin\Debug\netcoreapp2.0\AcmeGames.dll
 C:\mtest\AcmeGames\bin\Debug\netcoreapp2.0\AcmeGames.pdb
-C:\mtest\AcmeGames\obj\Debug\netcoreapp2.0\AcmeGames.csprojAssemblyReference.cache
 C:\mtest\AcmeGames\obj\Debug\netcoreapp2.0\AcmeGames.csproj.CoreCompileInputs.cache
 C:\mtest\AcmeGames\obj\Debug\netcoreapp2.0\AcmeGames.AssemblyInfoInputs.cache
 C:\mtest\AcmeGames\obj\Debug\netcoreapp2.0\AcmeGames.AssemblyInfo.cs

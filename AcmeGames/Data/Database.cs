@@ -31,8 +31,8 @@ namespace AcmeGames.Data
 	    // NOTE: This accessor function must be used to access the data.
 	    private Task<IEnumerable<T>>PrivGetData<T>(IEnumerable<T>  aDataSource)
 	    {
-	        var delay = locRandom.Next(150, 1000);
-            Thread.Sleep(TimeSpan.FromMilliseconds(delay));
+	        //var delay = locRandom.Next(150, 1000);
+            //Thread.Sleep(TimeSpan.FromMilliseconds(delay));
 
 	        return Task.FromResult(aDataSource);
 	    }

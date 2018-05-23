@@ -9,9 +9,10 @@ export class Header extends React.Component<RouteComponentProps<{}>, {}> {
     public render() {
         return (
             <div className="header">
-                <a className="headerLink" href="/List">List</a>
-                <a className="headerLink" href="/User">User info</a>
-                <a className="headerLink" href="/List">Sign out</a>
+                <a className="headerLink" href="/List">LIST</a>
+                <a className="headerLink" href="/User">USER INFO</a>
+                <a className="headerLink" href="/User">REDEEM</a>
+                <a className="headerLink" href="/List">SIGN OUT</a>
             </div>
         );
     }

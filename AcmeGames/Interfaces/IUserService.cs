@@ -9,6 +9,6 @@ namespace AcmeGames.Interfaces
     public interface IUserService
     {
         UserDataViewModel GetUserData(string accountId);
-        bool UpdateUserData(UpdateUserDataViewModel vm);
+        void UpdateUserData(UpdateUserDataViewModel vm);
     }
 }

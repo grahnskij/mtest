@@ -25,6 +25,10 @@
         color: #2d7086;
     }
 
+    .formInput:invalid {
+        border: 2px solid #858585;
+    }
+
 .formButton {
     margin-top: 2em;
     color: #2d7086;
