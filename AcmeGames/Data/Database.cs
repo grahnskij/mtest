@@ -68,5 +68,13 @@ namespace AcmeGames.Data
                 SingleOrDefault(x => x.UserAccountId == vm.UserAccountId);
             user.Update(vm);
         }
+
+        public bool CheckPassword(string account, string password)
+        {
+            var user = PrivGetData(locUsers).Result.
+                SingleOrDefault(x => x.UserAccountId == account);
+
+            return (user.Password.Equals(password)) ? true : false;
+        }
     }
 }

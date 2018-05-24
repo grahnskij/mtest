@@ -22,9 +22,18 @@ namespace AcmeGames.Services
             return new UserDataViewModel(user);
         }
 
-        public void UpdateUserData(UpdateUserDataViewModel vm)
+        public bool UpdateUserData(UpdateUserDataViewModel vm)
         {
-            _db.UpdateUserData(vm);
+            var passConfirm = _db.CheckPassword(vm.UserAccountId, vm.OldPassword);
+
+            if(passConfirm)
+            {
+                _db.UpdateUserData(vm);
+                return true;
+            }else
+            {
+                return false;
+            } 
         }
     }
 }

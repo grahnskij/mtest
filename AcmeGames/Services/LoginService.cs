@@ -21,7 +21,14 @@ namespace AcmeGames.Services
         public LoginDataViewModel Login(string email, string password)
         {
             var user = _db.FindUser(email, password);
-            return new LoginDataViewModel(user);
+            if(user != null)
+            {
+                return new LoginDataViewModel(user);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

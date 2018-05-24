@@ -46,3 +46,4 @@ C:\mtest\AcmeGames\obj\Debug\netcoreapp2.0\AcmeGames.AssemblyInfoInputs.cache
 C:\mtest\AcmeGames\obj\Debug\netcoreapp2.0\AcmeGames.AssemblyInfo.cs
 C:\mtest\AcmeGames\obj\Debug\netcoreapp2.0\AcmeGames.dll
 C:\mtest\AcmeGames\obj\Debug\netcoreapp2.0\AcmeGames.pdb
+C:\mtest\AcmeGames\obj\Debug\netcoreapp2.0\AcmeGames.csprojAssemblyReference.cache

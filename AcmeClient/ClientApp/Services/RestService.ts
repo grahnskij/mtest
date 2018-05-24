@@ -76,4 +76,26 @@ export default class RestService {
             return response;
         });
     }
+
+    static updateUserData(body: object) {
+        let url = PathUtility.ApiAddress + PathUtility.ApiUser;
+        let payload = {
+            body: JSON.stringify(body),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + TokenUtility.getToken(),
+            }),
+            method: "put"
+        };
+
+        return fetch(url, payload).then(response => {
+            if (response.status == 401) {
+                TokenUtility.removeToken();
+                IdUtility.removeId();
+                window.location.replace("/");
+            }
+            return response;
+        });
+    }
 }
