@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { Login } from './components/Login';
 import { List } from './components/List';
 import { User } from './components/User';
+import { Redeem } from './components/Redeem';
 import { Header } from './components/Header';
 import Paths from './Utilities/PathUtility';
 import RestService from './Services/RestService';
@@ -16,6 +17,7 @@ export default class Routes extends React.Component<any, any> {
             <AuthRoute path={Paths.Home} component={Home} />
             <AuthRoute path={Paths.List} component={List} />
             <AuthRoute path={Paths.User} component={User} />
+            <AuthRoute path={Paths.Redeem} component={Redeem} />
         </Switch>
     }
 }

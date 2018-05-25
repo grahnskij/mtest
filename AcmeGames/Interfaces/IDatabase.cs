@@ -15,5 +15,7 @@ namespace AcmeGames.Interfaces
         Game FindGame(uint gameId);
         void UpdateUserData(UpdateUserDataViewModel vm);
         bool CheckPassword(string account, string password);
+        GameKey FindGameKey(string key);
+        void NewOwnership(uint gameId, string date, OwnershipState state, string accountId);
     }
 }

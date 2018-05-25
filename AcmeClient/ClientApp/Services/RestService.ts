@@ -22,15 +22,44 @@ export default class RestService {
         };
 
         return fetch(url, payload).then(response => {
-            if (response.status === 200) {
+
+            /*if (response.status === 200) {
                 response.json().then((data) => {
                     TokenUtility.setToken(data.token);
                     IdUtility.setId(data.id);
+                    return response;
                 });
             } else {
                 TokenUtility.removeToken();
                 IdUtility.removeId();
-            }
+                return response;
+            }*/
+            return response;
+        });
+    }
+
+    static hej(code: string) {
+        let url = PathUtility.ApiAddress + PathUtility.ApiCode;
+        let payload = {
+            body: JSON.stringify({
+                Code: code,
+                UserAccountId: IdUtility.getId()
+            }),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + TokenUtility.getToken()
+            }),
+            method: "post"
+        };
+
+        return fetch(url, payload).then(response => {
+            if (response.status === 401) {
+                response.json().then((data) => {
+                    TokenUtility.setToken(data.token);
+                    IdUtility.setId(data.id);
+                });
+            } 
             return response;
         });
     }
@@ -47,7 +76,7 @@ export default class RestService {
         };
 
         return fetch(url, payload).then(response => {
-            if (response.status !== 200) {
+            if (response.status == 401) {
                 TokenUtility.removeToken();
                 IdUtility.removeId();
                 window.location.replace("/");
@@ -68,7 +97,7 @@ export default class RestService {
         };
 
         return fetch(url, payload).then(response => {
-            if (response.status !== 200) {
+            if (response.status == 401) {
                 TokenUtility.removeToken();
                 IdUtility.removeId();
                 window.location.replace("/");

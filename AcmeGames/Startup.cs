@@ -46,6 +46,7 @@ namespace AcmeGames
             aServiceCollection.AddTransient<IGameService, GameService>();
             aServiceCollection.AddTransient<IUserService, UserService>();
             aServiceCollection.AddTransient<ILoginService, LoginService>();
+            aServiceCollection.AddTransient<ICodeService, CodeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

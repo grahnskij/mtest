@@ -10,5 +10,10 @@ namespace AcmeGames.Models
         public string	Key { get; set; }
         [Required]
         public bool		IsRedeemed { get; set; }
-	}
+
+        public void Redeem()
+        {
+            IsRedeemed = true;
+        }
+    }
 }

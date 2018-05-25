@@ -76,5 +76,20 @@ namespace AcmeGames.Data
 
             return (user.Password.Equals(password)) ? true : false;
         }
+
+        public GameKey FindGameKey(string key)
+        {
+            return PrivGetData(locKeys).Result.
+                SingleOrDefault(gameKey => gameKey.Key == key && gameKey.IsRedeemed == false);
+        }
+
+        public void NewOwnership(uint gameId, string date, OwnershipState state, string accountId)
+        {
+            var newOwnershipId = (uint) (locOwnership.Count() +1);
+            var newOwnership = new Ownership(gameId, newOwnershipId, date, state, accountId);
+            var newLocOwnership = locOwnership.ToList();
+            newLocOwnership.Add(newOwnership);
+            locOwnership = newLocOwnership;
+        }
     }
 }

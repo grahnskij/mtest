@@ -1,6 +1,8 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps, Redirect } from 'react-router';
 import RestService from "../Services/RestService";
+import IdUtility from '../Utilities/IdUtility';
+import TokenUtility from '../Utilities/TokenUtility';
 
 interface loginState {
     email: string;
@@ -25,7 +27,13 @@ export class Login extends React.Component<RouteComponentProps<{}>, loginState> 
         e.preventDefault();
         RestService.login(this.state.email, this.state.password).then(result => {
             if (result.status == 200) {
-                this.setState({ redirect: true });
+
+                result.json().then((data) => {
+                    TokenUtility.setToken(data.token);
+                    IdUtility.setId(data.id);
+                    this.setState({ redirect: true });
+                });
+
             } else if (result.status == 401) {
                 this.setState({ info: "Incorrect email or password!" });
             } else {
