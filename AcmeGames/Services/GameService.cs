@@ -20,16 +20,15 @@ namespace AcmeGames.Services
         public List<GamesListViewmodel> GetGamesForUser(string accountId)
         {
             var result = new List<GamesListViewmodel>();
-            var owned = _db.FindOwnership(accountId);
+            var owned = _db.FindOwned(accountId);
             for(var index = 0;index<owned.Count;index++)
             {
-                var game = _db.FindGame(owned[index].GameId);
                 result.Add(new GamesListViewmodel
-                {
-                    Registered = owned[index].RegisteredDate,
-                    Game = game.Name,
-                    Thumb = game.Thumbnail
-                });
+                (
+                    owned[index].Registered,
+                    owned[index].Game,
+                    owned[index].Thumb
+                ));
             }
             return result;
         }

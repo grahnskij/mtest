@@ -3,7 +3,6 @@
     flex-direction: row;
     width: 100%;
     margin-top: 2em;
-    color: #2d7086;
     border: 2px solid #2d7086;
     border-radius: .2em;
     padding: .5em;
@@ -18,4 +17,14 @@
 .listItem-img {
     flex: 1 1 100%;
     max-width: 240px;
+}
+
+.labelGameName {
+    font-size: 1.5em;
+    flex: 5 1 auto;
+}
+
+.labelGameReg {
+    font-size: .7em;
+    flex: 0 1 auto;
 }

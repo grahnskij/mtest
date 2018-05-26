@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AcmeGames.Interfaces;
+﻿using AcmeGames.Interfaces;
 using AcmeGames.ViewModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -33,12 +29,12 @@ namespace AcmeGames.Controllers
                 }
                 else
                 {
-                    return BadRequest("Either your code is incorrect, already redeemed or you already own that game!");
+                    return BadRequest();
                 }
             }
             else
             {
-                return BadRequest("You need to enter a code!");
+                return BadRequest();
             }
 
         }

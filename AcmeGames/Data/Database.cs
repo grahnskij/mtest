@@ -31,8 +31,8 @@ namespace AcmeGames.Data
 	    // NOTE: This accessor function must be used to access the data.
 	    private Task<IEnumerable<T>>PrivGetData<T>(IEnumerable<T>  aDataSource)
 	    {
-	        //var delay = locRandom.Next(150, 1000);
-            //Thread.Sleep(TimeSpan.FromMilliseconds(delay));
+	        var delay = locRandom.Next(150, 1000);
+            Thread.Sleep(TimeSpan.FromMilliseconds(delay));
 
 	        return Task.FromResult(aDataSource);
 	    }
@@ -54,6 +54,17 @@ namespace AcmeGames.Data
             return PrivGetData(locOwnership).Result
                 .Where(ownership => ownership.UserAccountId == userAccountId)
                 .ToList();
+        }
+
+        public List<GameListItem> FindOwned(string userAccountId)
+        {
+            var listA = PrivGetData(locGames).Result.ToList();
+            var listB = PrivGetData(locOwnership).Result.ToList();
+
+            return (from a in listB
+                    where a.UserAccountId == userAccountId
+                    join b in listA on a.GameId equals b.GameId
+                    select new GameListItem { Game = b.Name, Registered = a.RegisteredDate, Thumb = b.Thumbnail }).ToList();
         }
 
         public Game FindGame(uint gameId)

@@ -2,70 +2,55 @@
 import PathUtility from '../Utilities/PathUtility';
 import IdUtility from '../Utilities/IdUtility';
 
+export interface loginBody {
+    EmailAddress: string,
+    Password: string
+}
+
+export interface redeemBody {
+    Code: string,
+    UserAccountId: string
+}
+
+export interface userBody {
+    firstname: string;
+    lastname: string;
+    oldPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+    email: string;
+}
+
 export default class RestService {
     static AmISignedIn(): boolean {
         return !!TokenUtility.getToken();
     }
 
-    static login(email: string, password: string) {
-        let url = PathUtility.ApiAddress + PathUtility.ApiLogin;
+    static logOut() {
+        TokenUtility.removeToken();
+        IdUtility.removeId();
+    };
+
+    static logIn(token: string, id: string) {
+        TokenUtility.setToken(token);
+        IdUtility.setId(id);
+    }
+
+    static post(body: Object, url: string, auth: boolean) {
         let payload = {
-            body: JSON.stringify({
-                EmailAddress: email,
-                Password: password
-            }),
+            body: JSON.stringify(body),
             headers: new Headers({
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }),
             method: "post"
         };
+        if (auth) { payload.headers.append('Authorization', ('Bearer ' + TokenUtility.getToken())) };
 
-        return fetch(url, payload).then(response => {
-
-            /*if (response.status === 200) {
-                response.json().then((data) => {
-                    TokenUtility.setToken(data.token);
-                    IdUtility.setId(data.id);
-                    return response;
-                });
-            } else {
-                TokenUtility.removeToken();
-                IdUtility.removeId();
-                return response;
-            }*/
-            return response;
-        });
+        return fetch(url, payload);
     }
 
-    static hej(code: string) {
-        let url = PathUtility.ApiAddress + PathUtility.ApiCode;
-        let payload = {
-            body: JSON.stringify({
-                Code: code,
-                UserAccountId: IdUtility.getId()
-            }),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + TokenUtility.getToken()
-            }),
-            method: "post"
-        };
-
-        return fetch(url, payload).then(response => {
-            if (response.status === 401) {
-                response.json().then((data) => {
-                    TokenUtility.setToken(data.token);
-                    IdUtility.setId(data.id);
-                });
-            } 
-            return response;
-        });
-    }
-
-    static gamesList() {
-        let url = PathUtility.ApiAddress + PathUtility.ApiGames + "?id=" + IdUtility.getId();
+    static get(url: string) {
         let payload = {
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -75,39 +60,10 @@ export default class RestService {
             method: "get"
         };
 
-        return fetch(url, payload).then(response => {
-            if (response.status == 401) {
-                TokenUtility.removeToken();
-                IdUtility.removeId();
-                window.location.replace("/");
-            }
-            return response;
-        });
+        return fetch(url, payload);
     }
 
-    static userData() {
-        let url = PathUtility.ApiAddress + PathUtility.ApiUser + "?id=" + IdUtility.getId();
-        let payload = {
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': 'Bearer ' + TokenUtility.getToken(),
-            }),
-            method: "get"
-        };
-
-        return fetch(url, payload).then(response => {
-            if (response.status == 401) {
-                TokenUtility.removeToken();
-                IdUtility.removeId();
-                window.location.replace("/");
-            }
-            return response;
-        });
-    }
-
-    static updateUserData(body: object) {
-        let url = PathUtility.ApiAddress + PathUtility.ApiUser;
+    static put(body: Object, url: string) {
         let payload = {
             body: JSON.stringify(body),
             headers: new Headers({
@@ -117,14 +73,6 @@ export default class RestService {
             }),
             method: "put"
         };
-
-        return fetch(url, payload).then(response => {
-            if (response.status == 401) {
-                TokenUtility.removeToken();
-                IdUtility.removeId();
-                window.location.replace("/");
-            }
-            return response;
-        });
+        return fetch(url, payload);
     }
 }

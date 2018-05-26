@@ -2,14 +2,30 @@ html,
 body {
     height: 100%;
     font-family: Calibri;
-}
-
-.flexGrw {
-    flex: 1 1 100%;
+    color: #4d4d4d;
 }
 
 label {
     font-weight: normal;
+    margin: 0 0;
+}
+
+.infoLabel {
+    text-align: center;
+    margin: .5em 0;
+    font-size: .9em;
+    border-radius: .2em;
+    border: 1px solid;
+}
+
+.fail {
+    color: #941c1c;
+    border-color:  #941c1c;
+}
+
+.success {
+    color: #398d38;
+    border-color: #398d38;
 }
 
 .header {
@@ -18,7 +34,6 @@ label {
     display: flex;
     flex-direction: row;
     background-color: #2d7086;
-    color: #858585;
     border-radius: .2em;
 }
 
@@ -40,7 +55,6 @@ label {
     #react-app {
         width: 70%;
         margin: 0 auto;
-        height: 100%;
     }
 
     .contentContainer {
@@ -50,9 +64,11 @@ label {
         margin: 0 auto;
         min-width: 400px;
         font-size: 2em;
-        color: #858585;
     }
 }
+
+
+
 
 
 

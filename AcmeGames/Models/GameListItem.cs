@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AcmeGames.ViewModels
+namespace AcmeGames.Models
 {
-    public class GamesListViewmodel
+    public class GameListItem
     {
         [Required]
         public string Game { get; set; }
@@ -14,12 +14,5 @@ namespace AcmeGames.ViewModels
         public string Registered { get; set; }
         [Required]
         public string Thumb { get; set; }
-
-        public GamesListViewmodel(string reg, string game, string thumb)
-        {
-            Registered = reg;
-            Game = game;
-            Thumb = thumb;
-        }
     }
 }

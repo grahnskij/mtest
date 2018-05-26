@@ -1,7 +1,9 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps, Redirect } from 'react-router';
 import RestService from "../Services/RestService";
+import userBody from "../Services/RestService";
 import IdUtility from '../Utilities/IdUtility';
+import PathUtility from '../Utilities/PathUtility';
 
 interface userState {
     redirect: boolean;
@@ -13,6 +15,8 @@ interface userState {
     confirmPassword: string;
     email: string;
     role: string;
+    info: string;
+    status: string;
 }
 
 export class User extends React.Component<RouteComponentProps<{}>, userState> {
@@ -28,36 +32,55 @@ export class User extends React.Component<RouteComponentProps<{}>, userState> {
             newPassword: "",
             confirmPassword: "",
             email: "",
-            role: ""
+            role: "",
+            info: "",
+            status: ""
         }
     }
 
     updateUser(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        let payload = {
+        let body: userBody = {
             userAccountId : IdUtility.getId(),
             firstname : this.state.firstname,
             lastname : this.state.lastname,
-            birth : this.state.birth,
             email : this.state.email,
-            role : this.state.role,
             newPassword : this.state.newPassword,
             confirmPassword : this.state.confirmPassword,
             oldPassword : this.state.oldPassword
         };
-        RestService.updateUserData(payload).then(response => {
-            console.log(response);
-            this.setState({
-                oldPassword: "",
-                newPassword: "",
-                confirmPassword: ""
-            });
+        let url = PathUtility.ApiAddress + PathUtility.ApiUser;
+
+        RestService.put(body, url).then(response => {
+            if (response.status == 401) {
+                RestService.logOut();
+                this.setState({ redirect: true });
+            } else if (response.status == 200) {
+                this.setState({
+                    oldPassword: "",
+                    newPassword: "",
+                    confirmPassword: "",
+                    info: "User data updated!",
+                    status : "200"
+                });
+            }
+            else if (response.status == 400) {
+                this.setState({
+                    oldPassword: "",
+                    newPassword: "",
+                    confirmPassword: "",
+                    info: "Operation failed, data incorrect or missing",
+                    status: "400"
+                });
+            }
         });
     }
 
     componentDidMount() {
-        RestService.userData().then(response => {
-            if (response.status !== 200) {
+        let url = PathUtility.ApiAddress + PathUtility.ApiUser + "?id=" + IdUtility.getId();
+        RestService.get(url).then(response => {
+            if (response.status == 401) {
+                RestService.logOut();
                 this.setState({ redirect: true });
             } else {
                 response.json().then((data) => {
@@ -78,11 +101,12 @@ export class User extends React.Component<RouteComponentProps<{}>, userState> {
 
     public render() {
         if (this.state.redirect) { return <Redirect to='/' /> }
-        let errorLabel = null;
+        let statusClass = (this.state.status == "200") ? "infoLabel success" : "infoLabel fail";
+        let info = (this.state.info != "") ? <label className={statusClass}>{this.state.info}</label> : null;
         return <div>
             <div className="userContainer">
                 <form className="formContainer" onSubmit={(e) => this.updateUser(e)}>
-                    {errorLabel}
+                    {info}
                     <input
                         value={this.state.email}
                         onChange={(e) => { this.setState({ email: e.target.value }) }}
@@ -142,8 +166,7 @@ export class User extends React.Component<RouteComponentProps<{}>, userState> {
                         name="userNewPassword"
                         id="userNewPasswordInput"
                         className="formInput"
-                        placeholder="New password"
-                        required />
+                        placeholder="New password" />
                     <input
                         value={this.state.confirmPassword}
                         onChange={(e) => { this.setState({ confirmPassword: e.target.value }) }}
@@ -151,8 +174,7 @@ export class User extends React.Component<RouteComponentProps<{}>, userState> {
                         name="userConfirmPassword"
                         id="userConfirmPasswordInput"
                         className="formInput"
-                        placeholder="Confirm password"
-                        required />
+                        placeholder="Confirm password" />
                     <button className="formButton" type="submit">Update</button>
                 </form>
             </div>

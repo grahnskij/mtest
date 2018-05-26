@@ -5,7 +5,7 @@
     margin: 0 auto;
     max-width: 400px;
     font-size: 2em;
-    color: #858585;
+    color: #4d4d4d;
 }
 
 .formInput {
@@ -15,7 +15,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     font-family: inherit;
-    border-bottom: 2px solid #858585;
+    border-bottom: 2px solid #4d4d4d;
     margin: .5em 0;
 }
 
@@ -25,23 +25,10 @@
         color: #2d7086;
     }
 
-    .formInput:invalid {
-        border: 2px solid #858585;
-    }
-
 .formButton {
     margin-top: 2em;
     color: #2d7086;
     border: 2px solid #2d7086;
     background-color: transparent;
     border-radius: .2em;
-}
-
-.errorLabel {
-    color: #941c1c;
-    text-align: center;
-    margin: .5em 0;
-    font-size: .9em;
-    border-radius: .2em;
-    border: 1px solid #941c1c;
 }

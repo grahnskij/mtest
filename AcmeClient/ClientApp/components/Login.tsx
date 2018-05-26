@@ -1,8 +1,8 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps, Redirect } from 'react-router';
 import RestService from "../Services/RestService";
-import IdUtility from '../Utilities/IdUtility';
-import TokenUtility from '../Utilities/TokenUtility';
+import PathUtility from '../Utilities/PathUtility';
+import loginBody from '../Services/RestService'
 
 interface loginState {
     email: string;
@@ -25,15 +25,19 @@ export class Login extends React.Component<RouteComponentProps<{}>, loginState> 
 
     tryLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        RestService.login(this.state.email, this.state.password).then(result => {
-            if (result.status == 200) {
+        let body: loginBody = {
+            EmailAddress: this.state.email,
+            Password: this.state.password
+        };
 
+        let url = PathUtility.ApiAddress + PathUtility.ApiLogin;
+
+        RestService.post(body, url, false).then(result => {
+            if (result.status == 200) {
                 result.json().then((data) => {
-                    TokenUtility.setToken(data.token);
-                    IdUtility.setId(data.id);
+                    RestService.logIn(data.token, data.userAccountId);
                     this.setState({ redirect: true });
                 });
-
             } else if (result.status == 401) {
                 this.setState({ info: "Incorrect email or password!" });
             } else {
@@ -44,12 +48,12 @@ export class Login extends React.Component<RouteComponentProps<{}>, loginState> 
 
     public render() {
         if (this.state.redirect) { return <Redirect to='/List' /> }
-        let errorLabel = (this.state.info !== "") ? <label className="errorLabel">{this.state.info}</label> : null;
+        let infoLabel = (this.state.info !== "") ? <label className="infoLabel fail">{this.state.info}</label> : null;
 
         return (
             <div className="loginContainer">
                 <form className="formContainer" onSubmit={(e) => this.tryLogin(e)}>  
-                    {errorLabel}
+                    {infoLabel}
                     <input
                         onChange={(e) => { this.setState({ email: e.target.value }) }}
                         type="email"

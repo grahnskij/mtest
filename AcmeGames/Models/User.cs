@@ -32,8 +32,10 @@ namespace AcmeGames.Models
             FirstName = vm.Firstname;
             LastName = vm.Lastname;
             EmailAddress = vm.Email;
-            Password = vm.NewPassword;
-            DateOfBirth = Convert.ToDateTime(vm.Birth);
+            if(!String.IsNullOrWhiteSpace(vm.NewPassword))
+            {
+                Password = vm.NewPassword;
+            }
         }
 	}
 }

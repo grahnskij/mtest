@@ -11,6 +11,7 @@ namespace AcmeGames.Interfaces
     {
         User FindUser(string email, string password);
         User GetUserData(string accountId);
+        List<GameListItem> FindOwned(string userAccountId);
         List<Ownership> FindOwnership(string userAccountId);
         Game FindGame(uint gameId);
         void UpdateUserData(UpdateUserDataViewModel vm);

@@ -1,6 +1,8 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps, Redirect } from 'react-router';
 import RestService from "../Services/RestService";
+import PathUtility from '../Utilities/PathUtility';
+import IdUtility from '../Utilities/IdUtility';
 
 interface listState {
     listItems: Array<JSX.Element>;
@@ -18,8 +20,10 @@ export class List extends React.Component<RouteComponentProps<{}>, listState> {
     }
 
     componentDidMount() {
-        RestService.gamesList().then(response => {
-            if (response.status !== 200) {
+        let url = PathUtility.ApiAddress + PathUtility.ApiGames + "?id=" + IdUtility.getId();
+        RestService.get(url).then(response => {
+            if (response.status == 401) {
+                RestService.logOut();
                 this.setState({ redirect: true });
             } else {
                 response.json().then((data) => {
@@ -57,8 +61,8 @@ class ListItem extends React.Component<listItemProps, {}> {
         return (
             <div className="listItem">
                 <div className="listItem-info">
-                    <label className="flexGrw">{this.props.name}</label>
-                    <label className="flexGrw">Registered: {this.props.registered}</label>
+                    <label className="labelGameName">{this.props.name}</label>
+                    <label className="labelGameReg">Registered: {this.props.registered}</label>
                 </div>
                 <div className="listItem-img flexGrw">
                     <img src={this.props.thumb} />
