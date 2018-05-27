@@ -19,6 +19,8 @@ namespace AcmeGames.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         public IActionResult RedeemCode([FromBody] CodeRedeemViewModel vm)
         {
             if (ModelState.IsValid)

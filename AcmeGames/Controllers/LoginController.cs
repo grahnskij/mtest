@@ -15,6 +15,8 @@ namespace AcmeGames.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(200, Type = typeof(LoginDataViewModel))]
+        [ProducesResponseType(400)]
         public IActionResult Authenticate([FromBody] AuthRequestViewModel  aAuthRequest){
             if(ModelState.IsValid)
             {

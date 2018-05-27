@@ -1,8 +1,10 @@
 ﻿using AcmeGames.Interfaces;
+using AcmeGames.ViewModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace AcmeGames.Controllers
 {
@@ -19,6 +21,8 @@ namespace AcmeGames.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(List<GamesListViewModel>))]
+        [ProducesResponseType(400)]
         public IActionResult GetUserGamesList(string id){
             if(String.IsNullOrWhiteSpace(id))
             {

@@ -20,6 +20,8 @@ namespace AcmeGames.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(UserDataViewModel))]
+        [ProducesResponseType(400)]
         public IActionResult GetUserData(string id)
         {
             if (String.IsNullOrWhiteSpace(id))
@@ -31,6 +33,8 @@ namespace AcmeGames.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         public IActionResult UpdateUserData([FromBody] UpdateUserDataViewModel vm)
         {
             if(ModelState.IsValid)
