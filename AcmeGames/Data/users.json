@@ -1,14 +1,5 @@
 [
   {
-    "userAccountId": "06399079-0aee-4448-adf7-0ca6ebf0f6a2",
-    "firstName": "hej",
-    "lastName": "hejsan",
-    "emailAddress": "hej@hejsan.com",
-    "password": "hej",
-    "isAdmin": false,
-    "dateOfBirth": "1998-03-27"
-  },
-  {
     "userAccountId": "04399079-0aee-4448-adf7-0ca6ebf0f6a2",
     "firstName": "Louis",
     "lastName": "Foster",

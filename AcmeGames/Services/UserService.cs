@@ -19,6 +19,10 @@ namespace AcmeGames.Services
         public UserDataViewModel GetUserData(string accountId)
         {
             var user = _db.GetUserData(accountId);
+            if(user == null)
+            {
+                return null;
+            }
             return new UserDataViewModel(user);
         }
 
@@ -26,14 +30,12 @@ namespace AcmeGames.Services
         {
             var passConfirm = _db.CheckPassword(vm.UserAccountId, vm.OldPassword);
 
-            if(passConfirm)
-            {
-                _db.UpdateUserData(vm);
-                return true;
-            }else
+            if(!passConfirm)
             {
                 return false;
-            } 
+            }
+            _db.UpdateUserData(vm);
+            return true;
         }
     }
 }

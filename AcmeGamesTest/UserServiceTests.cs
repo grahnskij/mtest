@@ -46,12 +46,26 @@ namespace AcmeGamesTest
         }
 
         [Fact]
-        public void UserService_UpdateUserData_PasswordFail()
+        public void UserService_GetUserData_EmptyResult()
         {
             //Arrange
             var mockService = new Mock<IDatabase>();
             var service = new UserService(mockService.Object);
 
+            mockService.Setup(serv => serv.GetUserData("1"))
+                .Returns((User)null);
+            //Act
+            var result = service.GetUserData(accountId: "1");
+            //Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public void UserService_UpdateUserData_PasswordFail()
+        {
+            //Arrange
+            var mockService = new Mock<IDatabase>();
+            var service = new UserService(mockService.Object);
             var vm = new UpdateUserDataViewModel
             {
                 UserAccountId = "1",
@@ -60,12 +74,12 @@ namespace AcmeGamesTest
                 Email = "a@a.se",
                 OldPassword = "",
             };
-
-
             mockService.Setup(serv => serv.CheckPassword("", ""))
                 .Returns(false);
+
             //Act
             var result = service.UpdateUserData(vm: vm);
+
             //Assert
             Assert.False(result);
         }
