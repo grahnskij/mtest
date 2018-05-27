@@ -5,6 +5,10 @@ body {
     color: #4d4d4d;
 }
 
+input:required {
+    box-shadow: none;
+}
+
 label {
     font-weight: normal;
     margin: 0 0;

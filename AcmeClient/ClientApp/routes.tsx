@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { Home } from './components/Home';
 import { Login } from './components/Login';
 import { List } from './components/List';
 import { User } from './components/User';
@@ -14,7 +13,6 @@ export default class Routes extends React.Component<any, any> {
     render() {
         return <Switch>
             <Route exact path={Paths.Login} component={Login} />
-            <AuthRoute path={Paths.Home} component={Home} />
             <AuthRoute path={Paths.List} component={List} />
             <AuthRoute path={Paths.User} component={User} />
             <AuthRoute path={Paths.Redeem} component={Redeem} />

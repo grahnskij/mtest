@@ -10,7 +10,6 @@
     public static AcmeId: string = "ACME_ID;"
     //routes
     public static Login: string = "/";
-    public static Home: string = "/home";
     public static List: string = "/list";
     public static User: string = "/user";
     public static Redeem: string = "/redeem";

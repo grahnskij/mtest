@@ -14,8 +14,7 @@ namespace AcmeGames
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(
-            IConfiguration      aConfiguration)
+        public Startup(IConfiguration aConfiguration)
         {
             Configuration = aConfiguration;
         }
@@ -54,16 +53,14 @@ namespace AcmeGames
             if (aHostingEnvironment.IsDevelopment())
             {
                 aApplicationBuilder.UseDeveloperExceptionPage()
-                ;
+                    .UseCors(builder =>
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader()
+                    );
             }
 
-            aApplicationBuilder
-                .UseCors(builder =>
-                    builder.AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader()
-                        )
-                .UseMvc();
+            aApplicationBuilder.UseMvc();
         }
     }
 }
