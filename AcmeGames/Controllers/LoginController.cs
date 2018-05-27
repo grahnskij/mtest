@@ -18,7 +18,7 @@ namespace AcmeGames.Controllers
         public IActionResult Authenticate([FromBody] AuthRequestViewModel  aAuthRequest){
             if(ModelState.IsValid)
             {
-                var authenticated = _loginService.Login(aAuthRequest.EmailAddress, aAuthRequest.Password);
+                var authenticated = _loginService.Login(aAuthRequest);
 
                 if (authenticated != null)
                 {

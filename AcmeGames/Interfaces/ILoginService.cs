@@ -8,6 +8,6 @@ namespace AcmeGames.Interfaces
 {
     public interface ILoginService
     {
-        LoginDataViewModel Login(string email, string password);
+        LoginDataViewModel Login(AuthRequestViewModel aAuthRequest);
     }
 }

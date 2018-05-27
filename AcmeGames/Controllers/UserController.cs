@@ -3,6 +3,7 @@ using AcmeGames.ViewModels;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace AcmeGames.Controllers
 {
@@ -21,6 +22,10 @@ namespace AcmeGames.Controllers
         [HttpGet]
         public IActionResult GetUserData(string id)
         {
+            if (String.IsNullOrWhiteSpace(id))
+            {
+                return BadRequest();
+            }
             var result = _userService.GetUserData(id);
             return Ok(result);
         }

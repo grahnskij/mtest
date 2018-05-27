@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AcmeGames.ViewModels
 {
-    public class GamesListViewmodel
+    public class GamesListViewModel
     {
         [Required]
         public string Game { get; set; }
@@ -15,7 +15,7 @@ namespace AcmeGames.ViewModels
         [Required]
         public string Thumb { get; set; }
 
-        public GamesListViewmodel(string reg, string game, string thumb)
+        public GamesListViewModel(string reg, string game, string thumb)
         {
             Registered = reg;
             Game = game;

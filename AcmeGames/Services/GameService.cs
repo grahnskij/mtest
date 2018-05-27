@@ -17,13 +17,13 @@ namespace AcmeGames.Services
             _db = db;
         }
 
-        public List<GamesListViewmodel> GetGamesForUser(string accountId)
+        public List<GamesListViewModel> GetGamesForUser(string accountId)
         {
-            var result = new List<GamesListViewmodel>();
+            var result = new List<GamesListViewModel>();
             var owned = _db.FindOwned(accountId);
             for(var index = 0;index<owned.Count;index++)
             {
-                result.Add(new GamesListViewmodel
+                result.Add(new GamesListViewModel
                 (
                     owned[index].Registered,
                     owned[index].Game,

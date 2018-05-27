@@ -8,6 +8,6 @@ namespace AcmeGames.Interfaces
 {
     public interface IGameService
     {
-        List<GamesListViewmodel> GetGamesForUser(string accountId);
+        List<GamesListViewModel> GetGamesForUser(string accountId);
     }
 }

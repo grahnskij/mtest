@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AcmeGames.Models;
-using AcmeGames.Data;
 using AcmeGames.Interfaces;
 using AcmeGames.ViewModels;
 using System.Security.Claims;
@@ -27,9 +22,9 @@ namespace AcmeGames.Services
 
         }
 
-        public LoginDataViewModel Login(string email, string password)
+        public LoginDataViewModel Login(AuthRequestViewModel aAuthRequest)
         {
-            var user = _db.FindUser(email, password);
+            var user = _db.FindUser(aAuthRequest.EmailAddress, aAuthRequest.Password);
             if(user != null)
             {
                 var claims = new[]
@@ -48,7 +43,6 @@ namespace AcmeGames.Services
                         claims,
                         expires: DateTime.Now.AddMinutes(30),
                         signingCredentials: mySigningCredentials);
-
 
                 var token = new JwtSecurityTokenHandler().WriteToken(securityToken);
 
