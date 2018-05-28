@@ -13681,7 +13681,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\richasaurus\\.nuget\\packages\\": {},
+    "C:\\Users\\richard.grahn\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -13690,14 +13690,14 @@
       "projectUniqueName": "C:\\mtest\\AcmeGames\\AcmeGames.csproj",
       "projectName": "AcmeGames",
       "projectPath": "C:\\mtest\\AcmeGames\\AcmeGames.csproj",
-      "packagesPath": "C:\\Users\\richasaurus\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\richard.grahn\\.nuget\\packages\\",
       "outputPath": "C:\\mtest\\AcmeGames\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\richasaurus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\richard.grahn\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
